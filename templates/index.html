@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Movie Toxic Comment Analyzer</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+    <header class="navbar">
+
+        <div class="logo">
+            TOXIC<span>WATCH</span>
+        </div>
+
+        <div class="nav-title">
+            Movie Comment Analysis
+        </div>
+
+    </header>
+
+
+    <section class="hero">
+
+        <h1>Movie Comment Analyzer</h1>
+
+        <p>
+            Select a movie and analyze the toxicity
+            of its comments using NLP.
+        </p>
+
+    </section>
+
+
+    <section class="movie-section">
+
+        <h2>Movies</h2>
+
+        <div class="movie-grid">
+
+            {% for movie in movies %}
+
+            <a href="{{ url_for('movie', movie_id=movie.id) }}"
+               class="movie-card">
+
+                <img src="{{ url_for(
+                    'static',
+                    filename='movies/' + movie.image
+                ) }}"
+                alt="{{ movie.name }}">
+
+                <div class="movie-title">
+
+                    {{ movie.name }}
+
+                </div>
+
+            </a>
+
+            {% endfor %}
+
+        </div>
+
+    </section>
+
+</body>
+
+</html>

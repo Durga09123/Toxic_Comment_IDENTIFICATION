@@ -1,0 +1,750 @@
+/* ============================================================
+   BASIC RESET
+   ============================================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* ============================================================
+   BODY
+   ============================================================ */
+
+body {
+    font-family: Arial, sans-serif;
+    background: #0b0b0b;
+    color: white;
+    min-height: 100vh;
+}
+
+
+/* ============================================================
+   NAVIGATION BAR
+   ============================================================ */
+
+.navbar {
+    height: 70px;
+    padding: 0 5%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    background: #111;
+
+    border-bottom: 1px solid #252525;
+}
+
+
+/* Logo */
+
+.logo {
+    font-size: 25px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.logo span {
+    color: #e50914;
+}
+
+
+/* Navigation title */
+
+.nav-title {
+    color: #aaa;
+}
+
+
+/* Back button */
+
+.back-button {
+    color: white;
+    text-decoration: none;
+
+    background: #222;
+
+    padding: 10px 18px;
+
+    border-radius: 5px;
+
+    transition: 0.2s;
+}
+
+.back-button:hover {
+    background: #333;
+}
+
+
+/* ============================================================
+   HOME PAGE HERO
+   ============================================================ */
+
+.hero {
+    text-align: center;
+
+    padding: 70px 20px 40px;
+}
+
+.hero h1 {
+    font-size: 42px;
+
+    margin-bottom: 15px;
+}
+
+.hero p {
+    color: #aaa;
+
+    font-size: 18px;
+}
+
+
+/* ============================================================
+   MOVIE SECTION
+   ============================================================ */
+
+.movie-section {
+    padding: 20px 5% 60px;
+}
+
+.movie-section h2 {
+    margin-bottom: 25px;
+
+    font-size: 28px;
+}
+
+
+/* Movie grid */
+
+.movie-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(180px, 1fr));
+
+    gap: 25px;
+}
+
+
+/* Movie card */
+
+.movie-card {
+    text-decoration: none;
+
+    color: white;
+
+    background: #171717;
+
+    border-radius: 8px;
+
+    overflow: hidden;
+
+    transition:
+        transform 0.25s,
+        box-shadow 0.25s;
+}
+
+.movie-card:hover {
+    transform: scale(1.05);
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.6);
+}
+
+
+/* Movie image */
+
+.movie-card img {
+    width: 100%;
+
+    height: 270px;
+
+    object-fit: cover;
+
+    display: block;
+}
+
+
+/* Movie title */
+
+.movie-title {
+    padding: 15px;
+
+    font-size: 17px;
+
+    font-weight: bold;
+}
+
+
+/* ============================================================
+   MOVIE DETAILS PAGE
+   ============================================================ */
+
+.movie-page {
+    width: 90%;
+
+    max-width: 1200px;
+
+    margin: 40px auto;
+
+    padding-bottom: 60px;
+}
+
+
+/* ============================================================
+   ALERT MESSAGE
+   ============================================================ */
+
+.alert-message {
+    background: #3a2020;
+
+    border: 1px solid #e50914;
+
+    color: #ff6b6b;
+
+    padding: 15px 20px;
+
+    border-radius: 8px;
+
+    margin-bottom: 25px;
+
+    font-weight: bold;
+
+    text-align: center;
+
+    animation: alertAppear 0.3s ease;
+}
+
+
+/* Alert animation */
+
+@keyframes alertAppear {
+
+    from {
+        opacity: 0;
+
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform: translateY(0);
+    }
+}
+
+
+/* ============================================================
+   MOVIE INFORMATION
+   ============================================================ */
+
+.movie-info {
+    display: flex;
+
+    gap: 40px;
+
+    margin-bottom: 50px;
+}
+
+
+/* Poster container */
+
+.poster-container {
+    width: 280px;
+
+    flex-shrink: 0;
+}
+
+
+/* Large poster */
+
+.large-poster {
+    width: 100%;
+
+    border-radius: 10px;
+
+    display: block;
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+
+/* Movie details */
+
+.movie-details {
+    padding-top: 20px;
+}
+
+.movie-details h1 {
+    font-size: 40px;
+
+    margin-bottom: 20px;
+}
+
+.movie-details p {
+    color: #bbb;
+
+    line-height: 1.8;
+
+    font-size: 17px;
+}
+
+
+/* ============================================================
+   ANALYSIS SECTION
+   ============================================================ */
+
+.analysis-section {
+    background: #151515;
+
+    padding: 35px;
+
+    border-radius: 12px;
+
+    margin-bottom: 40px;
+}
+
+.analysis-section h2 {
+    text-align: center;
+
+    margin-bottom: 35px;
+}
+
+
+/* Statistics */
+
+.statistics {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 80px;
+
+    flex-wrap: wrap;
+}
+
+
+/* Individual statistic */
+
+.stat-card {
+    text-align: center;
+}
+
+
+/* ============================================================
+   CIRCLES
+   ============================================================ */
+
+.circle {
+    width: 180px;
+
+    height: 180px;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    position: relative;
+}
+
+
+/* Inner circle */
+
+.circle::before {
+    content: "";
+
+    position: absolute;
+
+    width: 140px;
+
+    height: 140px;
+
+    background: #151515;
+
+    border-radius: 50%;
+}
+
+
+/* ============================================================
+   NON-TOXIC CIRCLE
+   ============================================================ */
+
+.non-toxic-circle {
+    background:
+        conic-gradient(
+            #20c997 var(--percentage),
+            #303030 0
+        );
+}
+
+
+/* ============================================================
+   TOXIC CIRCLE
+   ============================================================ */
+
+.toxic-circle {
+    background:
+        conic-gradient(
+            #e50914 var(--percentage),
+            #303030 0
+        );
+}
+
+
+/* ============================================================
+   BLOCKED CIRCLE
+   ============================================================ */
+
+.blocked-circle {
+    background:
+        conic-gradient(
+            #777 var(--percentage),
+            #303030 0
+        );
+}
+
+
+/* Circle text */
+
+.circle-content {
+    position: relative;
+
+    text-align: center;
+
+    z-index: 2;
+}
+
+.circle-content strong {
+    display: block;
+
+    font-size: 28px;
+}
+
+.circle-content span {
+    font-size: 14px;
+
+    color: #aaa;
+}
+
+
+/* ============================================================
+   STATISTIC TITLES AND COUNTS
+   ============================================================ */
+
+.stat-card h3 {
+    margin-top: 20px;
+
+    color: #ddd;
+
+    font-size: 16px;
+}
+
+.stat-card > p {
+    font-size: 28px;
+
+    font-weight: bold;
+
+    margin-top: 8px;
+}
+
+
+/* ============================================================
+   TOTAL COMMENTS
+   ============================================================ */
+
+.total-comments {
+    text-align: center;
+
+    margin-top: 35px;
+
+    font-size: 18px;
+
+    color: #bbb;
+}
+
+.total-comments strong {
+    color: white;
+}
+
+
+/* ============================================================
+   COMMENTS SECTION
+   ============================================================ */
+
+.comments-section {
+    background: #151515;
+
+    padding: 35px;
+
+    border-radius: 12px;
+}
+
+.comments-section h2 {
+    margin-bottom: 25px;
+}
+
+
+/* ============================================================
+   COMMENT FORM
+   ============================================================ */
+
+.comment-form {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 15px;
+
+    margin-bottom: 35px;
+}
+
+
+/* Input and textarea */
+
+.comment-form input,
+.comment-form textarea {
+    width: 100%;
+
+    padding: 14px;
+
+    border: 1px solid #333;
+
+    border-radius: 6px;
+
+    background: #222;
+
+    color: white;
+
+    font-size: 15px;
+
+    outline: none;
+}
+
+
+/* Focus effect */
+
+.comment-form input:focus,
+.comment-form textarea:focus {
+    border-color: #555;
+}
+
+
+/* Textarea */
+
+.comment-form textarea {
+    resize: vertical;
+
+    min-height: 100px;
+}
+
+
+/* Submit button */
+
+.comment-form button {
+    padding: 14px;
+
+    background: #e50914;
+
+    color: white;
+
+    border: none;
+
+    border-radius: 6px;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.comment-form button:hover {
+    background: #b20710;
+}
+
+
+/* ============================================================
+   COMMENT CARD
+   ============================================================ */
+
+.comment-card {
+    background: #202020;
+
+    padding: 20px;
+
+    border-radius: 8px;
+
+    margin-bottom: 15px;
+
+    border: 1px solid #292929;
+}
+
+
+/* Comment header */
+
+.comment-header {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 15px;
+}
+
+
+/* Comment text */
+
+.comment-text {
+    margin: 15px 0;
+
+    color: #ddd;
+
+    line-height: 1.6;
+
+    word-wrap: break-word;
+}
+
+
+/* Confidence */
+
+.comment-card small {
+    color: #777;
+}
+
+
+/* ============================================================
+   TOXIC LABEL
+   ============================================================ */
+
+.toxic-label {
+    background: #e50914;
+
+    color: white;
+
+    padding: 5px 10px;
+
+    border-radius: 20px;
+
+    font-size: 11px;
+
+    font-weight: bold;
+}
+
+
+/* ============================================================
+   NON-TOXIC LABEL
+   ============================================================ */
+
+.safe-label {
+    background: #20c997;
+
+    color: white;
+
+    padding: 5px 10px;
+
+    border-radius: 20px;
+
+    font-size: 11px;
+
+    font-weight: bold;
+}
+
+
+/* ============================================================
+   NO COMMENTS
+   ============================================================ */
+
+.no-comments {
+    text-align: center;
+
+    color: #777;
+
+    padding: 30px;
+
+    line-height: 1.8;
+}
+
+
+/* ============================================================
+   MOBILE RESPONSIVE DESIGN
+   ============================================================ */
+
+@media (max-width: 700px) {
+
+    /* Movie information */
+
+    .movie-info {
+        flex-direction: column;
+    }
+
+
+    /* Poster */
+
+    .poster-container {
+        width: 220px;
+
+        margin: auto;
+    }
+
+
+    /* Movie title */
+
+    .movie-details h1 {
+        font-size: 30px;
+    }
+
+
+    /* Statistics */
+
+    .statistics {
+        gap: 50px;
+    }
+
+
+    /* Navigation */
+
+    .navbar {
+        padding: 0 20px;
+    }
+
+
+    .nav-title {
+        display: none;
+    }
+
+
+    /* Analysis */
+
+    .analysis-section,
+    .comments-section {
+        padding: 25px 20px;
+    }
+
+
+    /* Circle */
+
+    .circle {
+        width: 160px;
+
+        height: 160px;
+    }
+
+
+    .circle::before {
+        width: 125px;
+
+        height: 125px;
+    }
+
+}

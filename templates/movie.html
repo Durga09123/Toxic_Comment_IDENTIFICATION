@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>{{ movie.name }} - ToxicWatch</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+
+<body>
+
+
+<!-- ============================================================
+     NAVIGATION BAR
+     ============================================================ -->
+
+<header class="navbar">
+
+    <div class="logo">
+        TOXIC<span>WATCH</span>
+    </div>
+
+    <a href="{{ url_for('home') }}"
+       class="back-button">
+
+        ← Back to Movies
+
+    </a>
+
+</header>
+
+
+
+<!-- ============================================================
+     MAIN PAGE
+     ============================================================ -->
+
+<main class="movie-page">
+
+
+    <!-- ========================================================
+         BLOCKED COMMENT ALERT
+         ======================================================== -->
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+
+        {% if messages %}
+
+            {% for category, message in messages %}
+
+                <div class="alert-message">
+
+                    {{ message }}
+
+                </div>
+
+            {% endfor %}
+
+        {% endif %}
+
+    {% endwith %}
+
+
+
+    <!-- ========================================================
+         MOVIE DETAILS
+         ======================================================== -->
+
+    <section class="movie-info">
+
+
+        <!-- Movie Poster -->
+
+        <div class="poster-container">
+
+            <img
+                src="{{ url_for(
+                    'static',
+                    filename='movies/' + movie.image
+                ) }}"
+                class="large-poster"
+                alt="{{ movie.name }}"
+            >
+
+        </div>
+
+
+        <!-- Movie Information -->
+
+        <div class="movie-details">
+
+            <h1>
+                {{ movie.name }}
+            </h1>
+
+            <p>
+                {{ movie.description }}
+            </p>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- ========================================================
+         COMMENT ANALYSIS
+         ======================================================== -->
+
+    <section class="analysis-section">
+
+
+        <h2>
+            Comment Analysis
+        </h2>
+
+
+        <div class="statistics">
+
+
+            <!-- =================================================
+                 NON-TOXIC CIRCLE
+                 ================================================= -->
+
+            <div class="stat-card">
+
+
+                <div
+                    class="circle non-toxic-circle"
+                    style="--percentage: {{ non_toxic_percentage }}%;"
+                >
+
+                    <div class="circle-content">
+
+                        <strong>
+                            {{ non_toxic_percentage }}%
+                        </strong>
+
+                        <span>
+                            Non-Toxic
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <h3>
+                    Non-Toxic Comments
+                </h3>
+
+
+                <p>
+                    {{ non_toxic_count }}
+                </p>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 TOXIC CIRCLE
+                 ================================================= -->
+
+            <div class="stat-card">
+
+
+                <div
+                    class="circle toxic-circle"
+                    style="--percentage: {{ toxic_percentage }}%;"
+                >
+
+                    <div class="circle-content">
+
+                        <strong>
+                            {{ toxic_percentage }}%
+                        </strong>
+
+                        <span>
+                            Toxic
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <h3>
+                    Toxic Comments
+                </h3>
+
+
+                <p>
+                    {{ toxic_count }}
+                </p>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 BLOCKED CIRCLE
+                 ================================================= -->
+
+            <div class="stat-card">
+
+
+                <div
+                    class="circle blocked-circle"
+                    style="--percentage: {{ blocked_percentage }}%;"
+                >
+
+                    <div class="circle-content">
+
+                        <strong>
+                            {{ blocked_percentage }}%
+                        </strong>
+
+                        <span>
+                            Blocked
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <h3>
+                    Blocked Comments
+                </h3>
+
+
+                <p>
+                    {{ blocked_count }}
+                </p>
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- ====================================================
+             TOTAL COMMENTS
+             ==================================================== -->
+
+        <div class="total-comments">
+
+            Total Comments:
+
+            <strong>
+                {{ total_comments }}
+            </strong>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- ========================================================
+         COMMENT SECTION
+         ======================================================== -->
+
+    <section class="comments-section">
+
+
+        <h2>
+            💬 Comments
+        </h2>
+
+
+
+        <!-- ====================================================
+             COMMENT FORM
+             ==================================================== -->
+
+        <form
+            action="{{ url_for(
+                'add_comment',
+                movie_id=movie.id
+            ) }}"
+            method="POST"
+            class="comment-form"
+        >
+
+
+            <!-- Username -->
+
+            <input
+                type="text"
+                name="username"
+                placeholder="Your name"
+                maxlength="50"
+                required
+            >
+
+
+            <!-- Comment -->
+
+            <textarea
+                name="comment"
+                placeholder="Write your comment..."
+                rows="4"
+                maxlength="500"
+                required
+            ></textarea>
+
+
+            <!-- Submit -->
+
+            <button type="submit">
+
+                Analyze & Post Comment
+
+            </button>
+
+
+        </form>
+
+
+
+        <!-- ====================================================
+             COMMENT LIST
+             ==================================================== -->
+
+        <div class="comments-list">
+
+
+            {% if comments %}
+
+
+                {% for comment in comments %}
+
+
+                    <div class="comment-card">
+
+
+                        <!-- Comment Header -->
+
+                        <div class="comment-header">
+
+
+                            <strong>
+                                {{ comment.username }}
+                            </strong>
+
+
+
+                            <!-- Toxic -->
+
+                            {% if comment.prediction == "Toxic" %}
+
+                                <span class="toxic-label">
+
+                                    TOXIC
+
+                                </span>
+
+
+                            <!-- Non-Toxic -->
+
+                            {% else %}
+
+                                <span class="safe-label">
+
+                                    NON-TOXIC
+
+                                </span>
+
+                            {% endif %}
+
+
+                        </div>
+
+
+
+                        <!-- Comment Text -->
+
+                        <p class="comment-text">
+
+                            {{ comment.text }}
+
+                        </p>
+
+
+
+                        <!-- Confidence -->
+
+                        <small>
+
+                            Confidence:
+                            {{ comment.confidence }}%
+
+                        </small>
+
+
+                    </div>
+
+
+                {% endfor %}
+
+
+            {% else %}
+
+
+                <!-- =================================================
+                     NO COMMENTS
+                     ================================================= -->
+
+                <div class="no-comments">
+
+                    <p>
+                        No comments yet.
+                    </p>
+
+                    <p>
+                        Be the first to comment!
+
+                    </p>
+
+                </div>
+
+
+            {% endif %}
+
+
+        </div>
+
+
+    </section>
+
+
+</main>
+
+
+</body>
+
+</html>
